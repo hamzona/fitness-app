@@ -6,7 +6,6 @@ const RequireAuth = () => {
   const token = useSelector((state) => state.auth.accessToken);
   const navigate = useNavigate();
   useEffect(() => {
-    console.log(token);
     if (!token) {
       navigate("/login");
     }

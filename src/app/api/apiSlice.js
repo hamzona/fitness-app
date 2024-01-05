@@ -3,9 +3,9 @@ import { setCredentials, logOut } from "../../features/auth/authSlice";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: "https://wger.de/api/v2/",
-  //credentials: "include",
   prepareHeaders: (headers, { getState }) => {
-    const token = getState().auth.token;
+    const token = getState().auth.accessToken;
+
     if (token) {
       headers.set("Authorization", `Bearer ${token}`);
     }
@@ -15,16 +15,18 @@ const baseQuery = fetchBaseQuery({
 
 const fetchBaseQueryWithReauth = async (args, api, extraOptons) => {
   let result = await baseQuery(args, api, extraOptons);
-  console.log(result);
   if (result?.error?.status === 403) {
     const refresh = localStorage.getItem("refresh-token");
-    const refreshResult = await baseQuery("/token/refresh", api, {
-      body: { refresh },
+    const refreshResult = await fetch("https://wger.de/api/v2/token/refresh/", {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ refresh }),
     });
-    if (refreshResult?.data) {
-      api.dispatch(setCredentials(refreshResult.data.token));
-
+    const data = await refreshResult.json();
+    if (data) {
+      api.dispatch(setCredentials(data.access));
       result = await baseQuery(args, api, extraOptons);
     } else {
       api.dispatch(logOut());
@@ -35,5 +37,6 @@ const fetchBaseQueryWithReauth = async (args, api, extraOptons) => {
 
 export const apiSlice = createApi({
   baseQuery: fetchBaseQueryWithReauth,
+  tagTypes: ["NutritionPlan"],
   endpoints: (builder) => ({}),
 });

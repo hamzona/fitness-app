@@ -13,8 +13,9 @@ const PersistLogin = () => {
 
   useEffect(() => {
     const refreshFunction = async () => {
+      const refreshToken = localStorage.getItem("refresh-token");
       try {
-        const res = await refresh();
+        const res = await refresh({ refresh: refreshToken });
         if (res?.data) {
           dispatch(setCredentials(res.data.access));
         }

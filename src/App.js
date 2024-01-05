@@ -5,15 +5,36 @@ import Login from "./views/Login";
 import RequireAuth from "./features/auth/RequireAuth";
 import Home from "./views/Home";
 import PersistLogin from "./features/auth/PersistLogin";
+import Measurments from "./views/Measurments";
+import MyAccount from "./views/MyAccount";
+import NutritionPlan from "./views/NutritionPlan";
+import WeightOverview from "./views/WeightOverview";
+import MeasurmentsDetails from "./views/MeasurmentsDetails";
+import IngredientOverview from "./views/IngredientOverview";
+// import IngredientDetails from "./views/IngredientDetails";
 
 function App() {
   return (
     <Routes>
+      <Route path="/login" element={<Login />} />
+
       <Route element={<Layout />}>
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Home />} />
         <Route element={<PersistLogin />}>
           <Route element={<RequireAuth />}>
-            <Route path="/" element={<Home />} />
+            <Route path="/measurment" element={<Measurments />} />{" "}
+            <Route path="/measurment/:id" element={<MeasurmentsDetails />} />
+            <Route path="/myAccount" element={<MyAccount />} />
+            <Route path="/nutritionPlan" element={<NutritionPlan />} />
+            <Route path="/weightOverview" element={<WeightOverview />} />
+            <Route
+              path="/ingredientOverview"
+              element={<IngredientOverview />}
+            />
+            {/* <Route
+              path="/ingredientOverview/:id"
+              element={<IngredientDetails />}
+            /> */}
           </Route>
         </Route>
       </Route>

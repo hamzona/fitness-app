@@ -10,17 +10,15 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [login] = useLoginMutation();
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
+  const [login] = useLoginMutation();
 
   async function hendleSubmit() {
     try {
       const result = await login({ username: email, password });
       if (result?.data) {
-        console.log(result.data.access);
-
         dispatch(setCredentials({ accessToken: result.data.access }));
         localStorage.setItem("refresh-token", result.data.refresh);
         navigate("/");
