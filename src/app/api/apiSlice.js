@@ -37,6 +37,6 @@ const fetchBaseQueryWithReauth = async (args, api, extraOptons) => {
 
 export const apiSlice = createApi({
   baseQuery: fetchBaseQueryWithReauth,
-  tagTypes: ["NutritionPlan"],
+  tagTypes: ["NutritionPlan", "measurments"],
   endpoints: (builder) => ({}),
 });

@@ -38,26 +38,27 @@ export default function ButtonAppBar() {
                 Nutrition plan
               </Link>
             </Typography>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              <Link className="link" to={"/measurment"}>
-                Measurment
-              </Link>
-            </Typography>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              <Link className="link" to={"/weightOverview"}>
-                Weight Overview
-              </Link>
-            </Typography>
+
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               <Link className="link" to={"/ingredientOverview"}>
                 Ingredient overview
               </Link>
             </Typography>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              <Link className="link" to={"/measurment"}>
+                Measurment
+              </Link>
+            </Typography>
           </Box>
           {!token ? (
-            <Link className="link" to={"/login"}>
-              <Button color="inherit">Login</Button>
-            </Link>
+            <>
+              <Link className="link" to={"/login"}>
+                <Button color="inherit">Login</Button>
+              </Link>
+              <Link className="link" to={"/register"}>
+                <Button color="inherit">Register</Button>
+              </Link>
+            </>
           ) : (
             <Link className="link" to={"/myAccount"}>
               <Button color="inherit">My account</Button>

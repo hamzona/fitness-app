@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useGetIngredientsMutation } from "../features/auth/authApiSlice";
 import {
   Box,
   Button,
@@ -17,17 +17,22 @@ const IngredientOverview = () => {
   const [ingredients, setIngredients] = useState(null);
   const [count, setCount] = useState(0);
   const [page, setPage] = useState(1);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // Optional: Adds smooth scrolling
+    });
+  };
+
+  const [getIngredients] = useGetIngredientsMutation();
   useEffect(() => {
     const fetchIngredients = async () => {
       try {
-        const data = await axios.get(
-          `https://wger.de/api/v2/ingredientinfo?limit=${20}&offset=${
-            20 * page
-          }`,
-          {}
-        );
+        const data = await getIngredients({ page });
+
         console.log(data);
-        if (data.status === 200) {
+        if (data?.data?.results) {
           setIngredients(data.data.results);
           setCount(parseInt(data.data.count / 20));
         }
@@ -37,6 +42,7 @@ const IngredientOverview = () => {
     };
 
     fetchIngredients();
+    scrollToTop();
   }, [page]);
   const navigate = useNavigate();
   return (

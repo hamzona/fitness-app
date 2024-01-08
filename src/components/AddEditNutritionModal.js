@@ -76,7 +76,6 @@ export default function AddEditNutritionModal({
     }
   };
   useEffect(() => {
-    console.log(planToEdit);
     if (isEditMode) {
       setCalories(planToEdit.goal_energy);
       setFat(planToEdit.goal_fat);

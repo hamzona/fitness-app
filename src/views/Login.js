@@ -5,10 +5,11 @@ import { useLoginMutation } from "../features/auth/authApiSlice";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
+import { Box, Typography } from "@mui/material";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
 
   const dispatch = useDispatch();
 
@@ -17,7 +18,7 @@ const Login = () => {
 
   async function hendleSubmit() {
     try {
-      const result = await login({ username: email, password });
+      const result = await login({ username: username, password });
       if (result?.data) {
         dispatch(setCredentials({ accessToken: result.data.access }));
         localStorage.setItem("refresh-token", result.data.refresh);
@@ -29,13 +30,24 @@ const Login = () => {
   }
 
   return (
-    <div>
-      <h1>Login</h1>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+      }}
+    >
+      <Typography variant="h3" gutterBottom>
+        Login
+      </Typography>
+
       <Input
-        placeholder="Email"
-        value={email}
+        placeholder="Username"
+        value={username}
         onChange={(e) => {
-          setEmail(e.target.value);
+          setUsername(e.target.value);
         }}
       />
       <Input
@@ -45,8 +57,13 @@ const Login = () => {
           setPassword(e.target.value);
         }}
       />
+
       <Button onClick={hendleSubmit}>Submit</Button>
-    </div>
+
+      <Typography variant="body2" display="block" gutterBottom>
+        Username: demo1233, password: demomode
+      </Typography>
+    </Box>
   );
 };
 

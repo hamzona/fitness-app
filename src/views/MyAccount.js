@@ -1,5 +1,6 @@
 import React from "react";
 import { useGetProfilInfoQuery } from "../features/auth/authApiSlice";
+import { Box, Typography } from "@mui/material";
 
 const MyAccount = () => {
   const { data, isSuccess, isLoading, isError, error } =
@@ -10,13 +11,14 @@ const MyAccount = () => {
   if (isSuccess) {
     console.log(data);
     content = (
-      <div>
-        MyAccount
-        <h1>username:{data.username}</h1>
-        <h2>Email: {data.email}</h2>
-        <h2>Height: {data.height}</h2>
-        <h2>Calories: {data.calories}</h2>
-      </div>
+      <Box sx={{ padding: "100px" }}>
+        <Typography variant="h2" gutterBottom>
+          Username:{data.username}
+        </Typography>
+        <Typography variant="h2" gutterBottom>
+          Email: {data.email}{" "}
+        </Typography>
+      </Box>
     );
   }
 
