@@ -99,6 +99,7 @@ export default function AddEditNutritionModal({
           variant="outlined"
           sx={textFieldWidth}
           value={calories}
+          type="number"
           onChange={(e) => setCalories(e.target.value)}
         />
         <TextField
@@ -107,6 +108,7 @@ export default function AddEditNutritionModal({
           sx={textFieldWidth}
           value={proteins}
           onChange={(e) => setProteins(e.target.value)}
+          type="number"
         />
         <TextField
           label="Fat"
@@ -114,6 +116,7 @@ export default function AddEditNutritionModal({
           sx={textFieldWidth}
           value={fat}
           onChange={(e) => setFat(e.target.value)}
+          type="number"
         />
         <TextField
           label="Carbohydrates"
@@ -121,6 +124,7 @@ export default function AddEditNutritionModal({
           sx={textFieldWidth}
           value={carbohydrates}
           onChange={(e) => setCarbohydrates(e.target.value)}
+          type="number"
         />
         <TextField
           label="Description"
@@ -131,14 +135,13 @@ export default function AddEditNutritionModal({
         ></TextField>
       </DialogContent>
 
-      <DialogActions>
+      <DialogActions sx={{ display: "flex", justifyContent: "space-between" }}>
         <Button variant="outlined" onClick={handleClose}>
           Cancel
         </Button>
-        <Button
-          variant="contained"
-          onClick={createNutritionPlan}
-        >{` recipe`}</Button>
+        <Button variant="contained" onClick={createNutritionPlan}>{`${
+          isEditMode ? "Edit" : "Add"
+        } recipe`}</Button>
       </DialogActions>
     </Dialog>
   );
