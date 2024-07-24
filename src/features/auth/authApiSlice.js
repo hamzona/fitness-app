@@ -33,7 +33,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
     }),
     createNutritionPlan: builder.mutation({
       query: (credentials) => ({
-        url: "/nutritionplan/",
+        url: "/nutritionplan",
         method: "POST",
         body: { ...credentials },
       }),
@@ -77,7 +77,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
     }),
     postMeasurment: builder.mutation({
       query: (credentials) => ({
-        url: "/measurement/",
+        url: "/measurement",
         method: "POST",
         body: { ...credentials },
       }),
@@ -92,7 +92,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
     }),
     addMeasurmentCategory: builder.mutation({
       query: (credentials) => ({
-        url: "/measurement-category/",
+        url: "/measurement-category",
         method: "POST",
         body: { ...credentials },
       }),
@@ -106,7 +106,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
     }),
     register: builder.mutation({
       query: (credentials) => ({
-        url: "/register/",
+        url: "/register",
         method: "POST",
         body: { ...credentials },
       }),
